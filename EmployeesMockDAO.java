@@ -1,12 +1,10 @@
 package org.example.StrumienieWJanuszexie;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EmployeesMockDAO implements DataAccessObject<Employee> {
     private List<Employee> employeesDataBase;
-
 
     public EmployeesMockDAO() {
         this.employeesDataBase = new ArrayList<>();
@@ -26,7 +24,6 @@ public class EmployeesMockDAO implements DataAccessObject<Employee> {
     public Optional<Employee> read(String name, String surname) {
         for (int i = 0; i < employeesDataBase.size(); i++) {
             if (employeesDataBase.get(i).getName().equals(name) && employeesDataBase.get(i).getSurname().equals(surname)) {
-                //System.out.println("Odczytany pracownik: " + employeesDataBase.get(i).getName() + " " + employeesDataBase.get(i).getSurname());
                 return Optional.of(this.employeesDataBase.get(i));
             }
         }
@@ -47,7 +44,6 @@ public class EmployeesMockDAO implements DataAccessObject<Employee> {
         }
         return 0.0;
     }
-
 
     @Override
     public List<Employee> readAll() {
@@ -77,7 +73,6 @@ public class EmployeesMockDAO implements DataAccessObject<Employee> {
 
     @Override
     public Boolean deleteByObject(Employee objToDelete) {
-
         if (this.employeesDataBase.contains(objToDelete)) {
             this.employeesDataBase.remove(objToDelete);
             return true;
@@ -101,4 +96,50 @@ public class EmployeesMockDAO implements DataAccessObject<Employee> {
         }
         return false;
     }
+
+    //Którego pracownika trzeba zwolnić (podaj pracownika z najwyższym wynagrodzeniem)?
+    public Optional<Employee> getEmployeeWithBiggestSalary() {
+        return this.employeesDataBase.stream().max((empl1, empl2) -> empl1.getSalary().compareTo(empl2.getSalary()));
+    }
+
+    //W którym dziale należy przeprowadzić restrukturyzację (który dział ma najwyższą sumę wynagrodzeń wszystkich swoich pracowników)?
+    public String getMostExpensiveDepartment() {
+        List<String> departments = new ArrayList<>();
+        String depart = "";
+        for (Employee empl : employeesDataBase) {
+            String department = empl.getDepartment();
+            if (!departments.contains(department)) {
+                departments.add(department);
+            }
+        }
+        Double max = 0.0;
+        if (departments.size() > 0) {
+            for (String dep : departments) {
+                double temp = this.employeesDataBase.stream().filter(employee -> employee.getDepartment().equals(dep)).mapToDouble(empl -> empl.getSalary()).sum();
+                if (temp > max) {
+                    max = temp;
+                    depart = dep;
+                }
+            }
+        } else {
+            depart = "Brak elementów do sprawdzenia";
+        }
+        return depart;
+    }
+//Czy dostanę zawału (ilu pracowników zarabia powyżej danej kwoty)?
+
+    public int countEmployeesWithSalaryBiggerThan(Double givenSalary) {
+        return (int) this.employeesDataBase.stream().filter(employee -> employee.getSalary() > givenSalary).count();
+    }
+
+    //   Któremu pracownikowi będzie trzeba kupić opakowanie Sagi (podaj pracownika, którego urodziny są najbliżej dzisiejszej daty)?
+    public Employee closestBirthdayDate() throws ParseException {
+        return null;
+    }
 }
+
+
+
+
+
+

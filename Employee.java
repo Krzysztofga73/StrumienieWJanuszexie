@@ -4,7 +4,7 @@ public class Employee {
     private final String name;
     private final String surname;
     private final String dateOfBirth;
-    private double salary;
+    private Double salary;
     private String department;
 
     public Employee (String name, String surname, String dateOfBirth, double salary, String department){
@@ -22,9 +22,6 @@ public class Employee {
         this.salary = originalEmployee.salary;
         this.department = originalEmployee.department;
     }
-
-
-
     public String getName() {
         return name;
     }
@@ -37,7 +34,7 @@ public class Employee {
         return dateOfBirth;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
