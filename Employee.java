@@ -15,6 +15,16 @@ public class Employee {
         this.department = department;
     }
 
+    public Employee (Employee originalEmployee){
+        this.name = originalEmployee.name;
+        this.surname = originalEmployee.surname;
+        this.dateOfBirth = originalEmployee.dateOfBirth;
+        this.salary = originalEmployee.salary;
+        this.department = originalEmployee.department;
+    }
+
+
+
     public String getName() {
         return name;
     }
@@ -33,6 +43,11 @@ public class Employee {
 
     public String getDepartment() {
         return department;
+    }
+
+    public String showAllData(){
+        String text = this.name + ", " + this.surname + ", " + this.dateOfBirth + ", " + this.salary + ", " + this.department;
+        return text;
     }
 
     public void setSalary(double salary) {

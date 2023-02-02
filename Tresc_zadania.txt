@@ -1,0 +1,8 @@
+Zadanie - Strumienie w Januszexie
+Firma JanuszexPol zatrudnia pracowników - każdy ma imię, nazwisko, datę urodzenia, wysokość wynagrodzenia, departament.
+Prezes Janusz chce mieć wgląd do następujących danych (zaimplementuj interfejs i klasę DAO z odpowiednimi funkcjami za pomocą streamów):
+Ile zarabia Pan Areczek (podaj wynagrodzenie pracownika po podaniu jego imienia i nazwiska)?
+Którego pracownika trzeba zwolnić (podaj pracownika z najwyższym wynagrodzeniem)?
+W którym dziale należy przeprowadzić restrukturyzację (który dział ma najwyższą sumę wynagrodzeń wszystkich swoich pracowników)?
+Któremu pracownikowi będzie trzeba kupić opakowanie Sagi (podaj pracownika, którego urodziny są najbliżej dzisiejszej daty)?
+Czy dostanę zawału (ilu pracowników zarabia powyżej danej kwoty)?
